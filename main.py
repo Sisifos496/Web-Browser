@@ -13,6 +13,7 @@ webbrowser.Chrome("google-chrome")
 root = Tk()
 
 root.config(background="orange")
+# Color
 
 star = PhotoImage(file="star.png")
 
@@ -26,6 +27,7 @@ root.geometry("500x300")
 
 def web_browsing(entry_text):
     webbrowser.open_new_tab("https://www.google.com/search?q=" + entry_text)
+# Directing to Browser
 
 all_saved = ""
 
@@ -43,6 +45,7 @@ def saved_ones():
     saved_ones_entry = Entry(root3)
     saved_ones_entry.place(x=140, y=50)
     saved_ones_entry.insert(0, "SAVING SEARCH")
+    # Another Window about recording
 
     def saving():
         global all_saved
@@ -51,6 +54,7 @@ def saved_ones():
         with open("saved_ones.txt", "a") as file:
             file.write(all_saved)
         time.sleep(0.5)
+    # Putting Saved Ones In a File
 
 
     save_button_search = Button(root3, text="SAVE", command=saving)
@@ -113,6 +117,7 @@ def history():
     with open("history.txt", "a") as file:
         file.write(search_entry.get())
         file.write("\n")
+# Writing history into a txt file
 
 def show_history():
     root2 = Toplevel()
@@ -138,6 +143,7 @@ def show_history():
 
     history_text = Text(history_label)
     history_text.pack()
+    # Showing a window with
 
     def saving_history():
         save_of_history = history_text.get("1.0", "end")
@@ -154,6 +160,7 @@ def show_history():
 
     deleting_history_button = Button(root2, text="DELETE HISTORY", command=deleting_history)
     deleting_history_button.place(x=80, y=400)
+    # Creating a text area the history is written and putting buttons to delete and when rearranged to save
 
 search_button = Button(root, text="SEARCH", command=lambda: [web_browsing(search_entry.get()), history()], font="Comfortaa")
 search_button.place(x=208, y=250)
@@ -166,6 +173,7 @@ def built_in_web_browsing(search_entry):
     options.add_argument("--headless")
 
     options.add_argument("--disable-gpu")
+    # Searching without showing browser
 
     browser = webdriver.Safari()
 
@@ -193,6 +201,7 @@ def built_in_web_browsing(search_entry):
         link_button = Button(root5, text=urls[i], command=functools.partial(direct, urls[i]))
         search_label.pack()
         link_button.pack()
+       # Scraping the first 5 results in google and then opening a new page and putting title and the links together
 
 built_in_search_button = Button(root, text='!!Search!!', command=lambda: [built_in_web_browsing(search_entry.get()), history()], font="Comfortaa")
 built_in_search_button.place(x=5, y=270)
